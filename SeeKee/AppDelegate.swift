@@ -8,6 +8,16 @@
 import Cocoa
 import Carbon
 
+struct Keystroke {
+    var original_event: NSEvent
+    var timestamp: Date = Date()
+    var cap: String
+    var ctrl: Bool = false
+    var alt: Bool = false
+    var cmd: Bool = false
+    var shift: Bool = false
+}
+
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
