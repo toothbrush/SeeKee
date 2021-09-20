@@ -26,7 +26,7 @@ extension Keystroke: CustomStringConvertible {
         display.append(self.alt ? "Alt-" : "")
         display.append(self.cmd ? "Cmd-" : "")
         // TODO: we need fancier logic around whether we should display shift or not.  E.g., if it's "~" we should not display shift, but if it's an arrow key we probably should.
-        // display.append(self.shift ? "shift-" : "")
+        display.append(self.shift && self.original_event.modifierFlags.contains(.function) ? "Shift-" : "")
         display.append(self.original_event.keyCap())
         return display
     }
