@@ -41,11 +41,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         let tr: CFBoolean = kCFBooleanTrue
-        let opts = NSDictionary(object: tr, forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString) as CFDictionary
+        let opts = NSDictionary(object: tr,
+                                forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString)
+            as CFDictionary
 
         guard AXIsProcessTrustedWithOptions(opts) == true
         else {
-            print("scheisse")
+            print("scheisse - please allow access and restart")
             return
         }
 
