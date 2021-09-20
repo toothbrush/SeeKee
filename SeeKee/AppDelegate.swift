@@ -24,7 +24,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        let opts = NSDictionary(object: kCFBooleanTrue, forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString) as CFDictionary
+        let tr: CFBoolean = kCFBooleanTrue
+        let opts = NSDictionary(object: tr, forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString) as CFDictionary
 
         guard AXIsProcessTrustedWithOptions(opts) == true
         else {
