@@ -11,6 +11,7 @@
 		DA68EEDC26F8A6C600ECDF71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA68EEDB26F8A6C600ECDF71 /* Assets.xcassets */; };
 		DA68EEDF26F8A6C600ECDF71 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA68EEDD26F8A6C600ECDF71 /* MainMenu.xib */; };
 		DA68EEE826F8AE5B00ECDF71 /* Keystroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68EEE726F8AE5B00ECDF71 /* Keystroke.swift */; };
+		DA68EEEA26F8B27100ECDF71 /* NSEventExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA68EEE926F8B27100ECDF71 /* NSEventExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		DA68EEE026F8A6C600ECDF71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA68EEE126F8A6C600ECDF71 /* SeeKee.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SeeKee.entitlements; sourceTree = "<group>"; };
 		DA68EEE726F8AE5B00ECDF71 /* Keystroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keystroke.swift; sourceTree = "<group>"; };
+		DA68EEE926F8B27100ECDF71 /* NSEventExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSEventExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				DA68EED926F8A6C400ECDF71 /* AppDelegate.swift */,
 				DA68EEE726F8AE5B00ECDF71 /* Keystroke.swift */,
+				DA68EEE926F8B27100ECDF71 /* NSEventExtensions.swift */,
 				DA68EEDB26F8A6C600ECDF71 /* Assets.xcassets */,
 				DA68EEDD26F8A6C600ECDF71 /* MainMenu.xib */,
 				DA68EEE026F8A6C600ECDF71 /* Info.plist */,
@@ -132,6 +135,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA68EEEA26F8B27100ECDF71 /* NSEventExtensions.swift in Sources */,
 				DA68EEDA26F8A6C400ECDF71 /* AppDelegate.swift in Sources */,
 				DA68EEE826F8AE5B00ECDF71 /* Keystroke.swift in Sources */,
 			);
