@@ -8,16 +8,6 @@
 import Cocoa
 import Carbon
 
-struct Keystroke {
-    var original_event: NSEvent
-    var timestamp: Date = Date()
-    var cap: String
-    var ctrl: Bool = false
-    var alt: Bool = false
-    var cmd: Bool = false
-    var shift: Bool = false
-}
-
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -31,7 +21,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func displayKeystrokes() {
         // TODO nicer
-        displayLabel.stringValue = keystrokes.debugDescription
+        displayLabel.stringValue = keystrokes.map({ ks in
+            ks.description
+        }).joined(separator: " ")
     }
 
     func pruneKeystrokes() {
@@ -44,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func handler(event: NSEvent!) {
         pruneKeystrokes()
-        print("[event] ", event.charactersIgnoringModifiers)
+        print("[event] ", event.charactersIgnoringModifiers ?? "*no character*")
         let newKey = Keystroke(original_event: event,
                                cap: String(format: "%d", event.keyCode),
                                ctrl: event.modifierFlags.contains(.control),
