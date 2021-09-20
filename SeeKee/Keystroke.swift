@@ -19,8 +19,12 @@ struct Keystroke {
 
 extension Keystroke: CustomStringConvertible {
     var description: String {
-        // create and return a String that is how
-        // you’d like a Store to look when printed
-        return "foo"
+        var display = ""
+        display.append(self.ctrl ? "Ctrl-" : "")
+        display.append(self.alt ? "Alt-" : "")
+        display.append(self.cmd ? "Cmd-" : "")
+        display.append(self.shift ? "shift-" : "")
+        display.append(self.cap)
+        return display
     }
 }
