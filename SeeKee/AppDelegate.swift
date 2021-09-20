@@ -26,11 +26,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let keycode = UInt16(kVK_ANSI_X)
     let keymask: NSEvent.ModifierFlags = [.command, .control]
 
+    var keystrokes: [Keystroke] = []
+
     func handler(event: NSEvent!) {
-        if event.keyCode == self.keycode
-            && event.modifierFlags.contains(keymask) {
-            print("PRESSED")
-        }
+        print("[event] ", event.charactersIgnoringModifiers)
+        let newKey = Keystroke(original_event: event,
+                               cap: String(format: "%d", event.keyCode),
+                               ctrl: event.modifierFlags.contains(.control),
+                               alt: event.modifierFlags.contains(.option),
+                               cmd: event.modifierFlags.contains(.command),
+                               shift: event.modifierFlags.contains(.shift))
+        keystrokes.append(newKey)
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
