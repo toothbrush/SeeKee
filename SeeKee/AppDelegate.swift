@@ -38,7 +38,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         pruneKeystrokes()
         print("[event] ", event.charactersIgnoringModifiers ?? "*no character*")
         let newKey = Keystroke(original_event: event,
-                               cap: String(format: "%d", event.keyCode),
+                               cap: event.charactersIgnoringModifiers ?? event.keyCode.description,
                                ctrl: event.modifierFlags.contains(.control),
                                alt: event.modifierFlags.contains(.option),
                                cmd: event.modifierFlags.contains(.command),
