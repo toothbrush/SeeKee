@@ -16,7 +16,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let keycode = UInt16(kVK_ANSI_X)
     let keymask: NSEvent.ModifierFlags = [.command, .control]
 
-    @IBOutlet weak var displayLabel: NSTextField!
+    @IBOutlet weak var backgroundBox: NSBox!
+    var displayLabel: NSTextField!
+
     var keystrokes: [Keystroke] = []
 
     func displayKeystrokes() {
@@ -47,6 +49,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        self.window.level = .floating
+        self.window.isMovableByWindowBackground = true
+        self.backgroundBox.fillColor = NSColor.black
+        self.backgroundBox.borderColor = NSColor.clear
+        self.backgroundBox.alphaValue = 0.4
+        self.backgroundBox.cornerRadius = 4
+
+        let font = NSFont(name: "Monaco", size: 17)!
+        displayLabel = NSTextField(labelWithString: "SeeKee")
+        displayLabel.frame = NSRect(x: 0, y: 0,
+                                    width: self.window.frame.size.width,
+                                    height: self.window.frame.size.height)
+        displayLabel.textColor = NSColor.cyan
+        displayLabel.font = font
+        displayLabel.alignment = .center
+
+        self.window.contentView?.addSubview(displayLabel)
+
         let tr: CFBoolean = kCFBooleanTrue
         let opts = NSDictionary(object: tr,
                                 forKey: kAXTrustedCheckOptionPrompt.takeUnretainedValue() as NSString)
