@@ -26,9 +26,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let keycode = UInt16(kVK_ANSI_X)
     let keymask: NSEvent.ModifierFlags = [.command, .control]
 
+    @IBOutlet weak var displayLabel: NSTextField!
     var keystrokes: [Keystroke] = []
 
+    func displayKeystrokes() {
+        // TODO nicer
+        displayLabel.stringValue = keystrokes.debugDescription
+    }
+
+    func pruneKeystrokes() {
+        if keystrokes.allSatisfy({ keystroke in
+            keystroke.timestamp.distance(to: Date()) > 1.0 // seconds
+        }) {
+            keystrokes = []
+        }
+    }
+
     func handler(event: NSEvent!) {
+        pruneKeystrokes()
         print("[event] ", event.charactersIgnoringModifiers)
         let newKey = Keystroke(original_event: event,
                                cap: String(format: "%d", event.keyCode),
@@ -37,6 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                cmd: event.modifierFlags.contains(.command),
                                shift: event.modifierFlags.contains(.shift))
         keystrokes.append(newKey)
+        displayKeystrokes()
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
