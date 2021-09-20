@@ -12,14 +12,13 @@ import Carbon
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet var window: NSWindow!
-
-    let keycode = UInt16(kVK_ANSI_X)
-    let keymask: NSEvent.ModifierFlags = [.command, .control]
-
     @IBOutlet weak var backgroundBox: NSBox!
-    var displayLabel: NSTextField!
 
+    var displayLabel: NSTextField!
     var keystrokes: [Keystroke] = []
+    var inactivity: Timer?
+
+    let MAX_KEYS = 3
 
     func displayKeystrokes() {
         // TODO nicer
@@ -33,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             keystroke.timestamp.distance(to: Date()) > 1.0 // seconds
         }) {
             keystrokes = []
+            displayKeystrokes() // this one is superfluous, but i'm aiming to be able to have a didSet hook, so let's see that i don't introduce leaky things.
         }
     }
 
@@ -45,7 +45,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                cmd: event.modifierFlags.contains(.command),
                                shift: event.modifierFlags.contains(.shift))
         keystrokes.append(newKey)
+        if keystrokes.count > MAX_KEYS {
+            keystrokes = keystrokes.suffix(MAX_KEYS)
+        }
         displayKeystrokes()
+    }
+
+    func pruneInactive() {
+        // this should clear keystrokes if nothing has happened for a (longer) while
+        if keystrokes.allSatisfy({ k in
+            k.timestamp.distance(to: Date()) > 3.0 // seconds
+        }) {
+            keystrokes = []
+            displayKeystrokes()
+        }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -66,6 +79,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         displayLabel.alignment = .center
 
         self.window.contentView?.addSubview(displayLabel)
+
+        inactivity = Timer.scheduledTimer(withTimeInterval: 0.1,
+                                          repeats: true,
+                                          block: { _ in
+                                            self.pruneInactive()
+                                          })
 
         let tr: CFBoolean = kCFBooleanTrue
         let opts = NSDictionary(object: tr,
