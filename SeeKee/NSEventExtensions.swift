@@ -41,6 +41,8 @@ extension NSEvent {
                 return "BkSPC"
             case kVK_ForwardDelete:
                 return "DEL"
+            case kVK_Help:
+                return "Ins" // ???
             case kVK_Tab:
                 return "TAB"
             case kVK_Return:
