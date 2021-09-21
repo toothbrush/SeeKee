@@ -70,10 +70,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.backgroundBox.cornerRadius = 4
 
         let font = NSFont(name: "Monaco", size: 17)!
-        displayLabel = NSTextField(labelWithString: "SeeKee")
-        displayLabel.frame = NSRect(x: 0, y: 0,
+        displayLabel = NSTextField(labelWithAttributedString: NSAttributedString(string: "SeeKee", attributes: [.font: font]))
+        displayLabel.frame = NSRect(x: 0,
+                                    y: (self.window.frame.size.height - displayLabel.frame.size.height)/2,
                                     width: self.window.frame.size.width,
-                                    height: self.window.frame.size.height)
+                                    height: displayLabel.frame.size.height)
         displayLabel.textColor = NSColor.cyan
         displayLabel.font = font
         displayLabel.alignment = .center
