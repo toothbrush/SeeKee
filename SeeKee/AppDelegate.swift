@@ -81,6 +81,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.window.contentView?.addSubview(displayLabel)
 
+        self.window.setFrameAutosaveName("com.rustlingbroccoli.SeeKee.WindowFrame")
+
         inactivity = Timer.scheduledTimer(withTimeInterval: 0.1,
                                           repeats: true,
                                           block: { _ in
