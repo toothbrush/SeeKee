@@ -38,15 +38,15 @@ extension NSEvent {
             case kVK_F12:
                 return "F12"
             case kVK_Delete:
-                return "BkSpc"
+                return "BkSPC"
             case kVK_ForwardDelete:
-                return "Del"
+                return "DEL"
             case kVK_Tab:
                 return "TAB"
             case kVK_Return:
                 return "RET"
             case kVK_Space:
-                return "Space"
+                return "SPC"
             case kVK_LeftArrow:
                 return "Left"
             case kVK_RightArrow:
@@ -55,6 +55,14 @@ extension NSEvent {
                 return "Up"
             case kVK_DownArrow:
                 return "Down"
+            case kVK_Home:
+                return "Home"
+            case kVK_PageUp:
+                return "PgUp"
+            case kVK_PageDown:
+                return "PgDn"
+            case kVK_End:
+                return "End"
             default:
                 if let char = self.charactersIgnoringModifiers {
                     return char
